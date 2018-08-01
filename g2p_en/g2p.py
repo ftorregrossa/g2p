@@ -20,13 +20,13 @@ try:
 except LookupError:
     nltk.download('cmudict')
 
-from train import Graph, hp, load_vocab
+from g2p_en.train import Graph, hp, load_vocab
 import numpy as np
 import codecs
 import re
 import os
 import unicodedata
-from expand import normalize_numbers
+from g2p_en.expand import normalize_numbers
 from builtins import str as unicode
 
 dirname = os.path.dirname(__file__)
@@ -46,6 +46,8 @@ config = tf.ConfigProto(
              device_count={'GPU' : 0},
              gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.0001)
          )
+tf.logging.set_verbosity("ERROR")
+
 
 g_sess = None # global session
 class Session: # make/remove global session
